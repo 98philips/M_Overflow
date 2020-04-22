@@ -12,7 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
@@ -21,10 +24,18 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.evedevelopers.mof.R;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
 
 
-public class Main5Activity extends AppCompatActivity {
+public class Home extends AppCompatActivity {
 
     /**
      * The {@link androidx.viewpager.widget.PagerAdapter} that will provide
@@ -40,15 +51,22 @@ public class Main5Activity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+
+    private static final int RC_SIGN_IN = 9001;
+    GoogleSignInAccount signedInAccount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main5);
-       // MobileAds.initialize(this, "ca-app-pub-8540538329551129~2638158280");
+        setContentView(R.layout.layout_home);
         SharedPreferences first = getSharedPreferences("first", AppCompatActivity.MODE_PRIVATE);
         if(first.getBoolean("one",true)){
-            Intent i = new Intent(Main5Activity.this,Mainhow.class);
+            Intent i = new Intent(Home.this,Mainhow.class);
             startActivity(i);
+            finish();
+        }else{
+            if(!isSignedIn()) {
+                signInSilently();
+            }
         }
 
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -116,7 +134,7 @@ public class Main5Activity extends AppCompatActivity {
         how.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Main5Activity.this,Mainhow.class);
+                Intent i = new Intent(Home.this,Mainhow.class);
                 startActivity(i);
                 overridePendingTransition(R.anim.slide_in_up,R.anim.slide_out_up);
             }
@@ -133,7 +151,7 @@ public class Main5Activity extends AppCompatActivity {
         hhh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Main5Activity.this,HighScore.class);
+                Intent i = new Intent(Home.this,HighScore.class);
                 startActivity(i);
                 overridePendingTransition(R.anim.slide_in_up,R.anim.slide_out_up);
             }
@@ -150,6 +168,58 @@ public class Main5Activity extends AppCompatActivity {
             }
         });*/
 
+    }
+
+    private void signInSilently() {
+        GoogleSignInClient signInClient = GoogleSignIn.getClient(this,
+                GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN);
+        //Intent signInIntent = signInClient.getSignInIntent();
+        //startActivityForResult(signInIntent, RC_SIGN_IN);
+
+        signInClient.silentSignIn().addOnCompleteListener(this,
+                new OnCompleteListener<GoogleSignInAccount>() {
+                    @Override
+                    public void onComplete(@NonNull Task<GoogleSignInAccount> task) {
+                        if (task.isSuccessful()) {
+                            // The signed in account is stored in the task's result.
+                            signedInAccount = task.getResult();
+                            //Toast.makeText(getApplicationContext(),"SignedIn",Toast.LENGTH_SHORT).show();
+
+                        } else {
+                            startSignInIntent();
+                        }
+                    }
+                });
+
+
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_SIGN_IN) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            if (result.isSuccess()) {
+                // The signed in account is stored in the result.
+                signedInAccount = result.getSignInAccount();
+            } else {
+                String message = result.getStatus().getStatusMessage();
+                if (message == null || message.isEmpty()) {
+                    message = getString(R.string.signin_other_error);
+                }
+//                new AlertDialog.Builder(this).setMessage(message)
+//                        .setNeutralButton(android.R.string.ok, null).show();
+            }
+        }
+    }
+    private void startSignInIntent() {
+        GoogleSignInClient signInClient = GoogleSignIn.getClient(this,
+                GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN);
+        Intent intent = signInClient.getSignInIntent();
+        startActivityForResult(intent, RC_SIGN_IN);
+    }
+    private boolean isSignedIn() {
+        signedInAccount = GoogleSignIn.getLastSignedInAccount(this);
+        return signedInAccount != null;
     }
 
 
@@ -203,7 +273,7 @@ public class Main5Activity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main5, container, false);
+            View rootView = inflater.inflate(R.layout.home_fragment, container, false);
             final Context t=getContext();
             ConstraintLayout three =  (ConstraintLayout) rootView.findViewById(R.id.three);
             ConstraintLayout four =  (ConstraintLayout) rootView.findViewById(R.id.four);
@@ -229,7 +299,7 @@ public class Main5Activity extends AppCompatActivity {
             three.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(t,Main3Activity.class);
+                    Intent i = new Intent(t, GameLevel3.class);
                     startActivity(i);
                    // overridePendingTransition(R.anim.slide_in_up,R.anim.slide_out_up);
                 }
@@ -237,7 +307,7 @@ public class Main5Activity extends AppCompatActivity {
             four.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(t,Main4Activity.class);
+                    Intent i = new Intent(t, GameLevel4.class);
                     startActivity(i);
                     //overridePendingTransition(R.anim.slide_in_up,R.anim.slide_out_up);
                 }
@@ -245,7 +315,7 @@ public class Main5Activity extends AppCompatActivity {
             five.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(t,MainActivity.class);
+                    Intent i = new Intent(t, GameLevel5.class);
                     startActivity(i);
                     //overridePendingTransition(R.anim.slide_in_up,R.anim.slide_out_up);
                 }

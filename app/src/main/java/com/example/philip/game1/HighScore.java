@@ -133,9 +133,6 @@ public class HighScore extends AppCompatActivity {
         }
         //signedInAccount = GoogleSignIn.getLastSignedInAccount(this);
         l=0;
-        //if(!isSignedIn()) {
-            signInSilently();
-       // }
        leaderboard.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {

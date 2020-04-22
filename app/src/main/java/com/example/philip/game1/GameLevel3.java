@@ -25,7 +25,7 @@ import java.util.Vector;
 
 
 
-public class Main3Activity extends AppCompatActivity {
+public class GameLevel3 extends AppCompatActivity {
     Button b0,b1,b2,b3,b4,b5,b6,b7,b8;
     int n,i,c,sel,temp,ar[],d;
     long millis,millip;
@@ -36,7 +36,7 @@ public class Main3Activity extends AppCompatActivity {
     Vector ars ;
     ConstraintLayout base;
     public void gameover(){
-        Intent i = new Intent(Main3Activity.this,Main2Activity.class);
+        Intent i = new Intent(GameLevel3.this, GameOver.class);
         i.putExtra("level",3);
         i.putExtra("score",c);
         overridePendingTransition(R.anim.slide_in_up,R.anim.slide_out_up);
@@ -127,7 +127,7 @@ public class Main3Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main3);
+        setContentView(R.layout.layout_level_3);
         base = findViewById(R.id.base);
         //AdRequest adRequest = new AdRequest.Builder().build();
         //mAdView.loadAd(adRequest);
@@ -365,7 +365,7 @@ public class Main3Activity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(Main3Activity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(GameLevel3.this);
         builder.setTitle("Quit Game!");
         builder.setMessage("All your current progress will be lost. Are you sure!!!");
         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {

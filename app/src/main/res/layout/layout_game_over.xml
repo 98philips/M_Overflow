@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context="com.example.philip.game1.Main2Activity">
+    tools:context="com.example.philip.game1.GameOver">
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -105,7 +105,7 @@
         android:layout_gravity="center"
         android:background="@drawable/try1"
         android:padding="5dp"
-        app:srcCompat="@drawable/tryagain" />
+        app:srcCompat="@drawable/ic_replay_24px" />
 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>

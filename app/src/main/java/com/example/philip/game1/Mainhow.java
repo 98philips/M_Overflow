@@ -1,5 +1,6 @@
 package com.example.philip.game1;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -102,6 +103,7 @@ public class Mainhow extends AppCompatActivity {
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startActivity(new Intent(Mainhow.this,Home.class));
                 finish();
             }
         });

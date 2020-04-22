@@ -14,7 +14,7 @@ import com.evedevelopers.mof.R;
 
 
 
-public class Main2Activity extends AppCompatActivity {
+public class GameOver extends AppCompatActivity {
     TextView ss,game,hs,highscore;
     ImageView tryagain,home;
     int ll,s;
@@ -63,7 +63,7 @@ public class Main2Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.layout_game_over);
         ex = getIntent().getExtras();
         s = ex.getInt("score");
         ll = ex.getInt("level");

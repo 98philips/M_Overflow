@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
+
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -25,8 +26,8 @@ import java.util.Vector;
 
 
 
-public class Main4Activity extends AppCompatActivity {
-    Button b0,b1,b2,b3,b4,b5,b6,b7,b8,b9,b10,b11,b12,b13,b14,b15;
+public class GameLevel5 extends AppCompatActivity {
+    Button b0,b1,b2,b3,b4,b5,b6,b7,b8,b9,b10,b11,b12,b13,b14,b15,b16,b17,b18,b19,b20,b21,b22,b23,b24;
     int n,i,c,sel,temp,ar[],d;
     long millis,millip;
     ConstraintLayout base;
@@ -35,8 +36,8 @@ public class Main4Activity extends AppCompatActivity {
     Vibrator vibe;
     Vector ars ;
     public void gameover(){
-        Intent i = new Intent(Main4Activity.this,Main2Activity.class);
-        i.putExtra("level",4);
+        Intent i = new Intent(GameLevel5.this, GameOver.class);
+        i.putExtra("level",5);
         i.putExtra("score",c);
         overridePendingTransition(R.anim.slide_in_up,R.anim.slide_out_up);
         startActivity(i);
@@ -53,7 +54,7 @@ public class Main4Activity extends AppCompatActivity {
             c++;
             //String nums = String.format("%d",c);
             score.setText("SCORE: "+String.valueOf(c));
-            if(n==15){
+            if(n==24){
                 gameover();
             }
             new_button();
@@ -70,37 +71,44 @@ public class Main4Activity extends AppCompatActivity {
         int cc;
         Random rand = new Random();
         Random color = new Random();
-        int co =  color.nextInt(4);
+        int co =  color.nextInt(5);
         switch (co){
             case 0:cc = R.drawable.color4;
                 if(Build.VERSION.SDK_INT>=21) {
-                    getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                    getWindow().setStatusBarColor(getResources().getColor(R.color.color4));
-                    getWindow().setNavigationBarColor(getResources().getColor(R.color.color4));
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            getWindow().setStatusBarColor(getResources().getColor(R.color.color4));
+            getWindow().setNavigationBarColor(getResources().getColor(R.color.color4));
                     base.setBackground(getResources().getDrawable(R.color.color4));
-                }break;
-            case 1:cc = R.drawable.color1;
-                if(Build.VERSION.SDK_INT>=21) {
-                    getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                    getWindow().setStatusBarColor(getResources().getColor(R.color.color1));
-                    getWindow().setNavigationBarColor(getResources().getColor(R.color.color1));
-                    base.setBackground(getResources().getDrawable(R.color.color1));
-                }break;
-            case 2:cc = R.drawable.color2;
+            }break;
+        case 1:cc = R.drawable.color1;
+            if(Build.VERSION.SDK_INT>=21) {
+                getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                getWindow().setStatusBarColor(getResources().getColor(R.color.color1));
+                getWindow().setNavigationBarColor(getResources().getColor(R.color.color1));
+                base.setBackground(getResources().getDrawable(R.color.color1));
+            }break;
+        case 2:cc = R.drawable.color2;
                 if(Build.VERSION.SDK_INT>=21) {
                     getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
                     getWindow().setStatusBarColor(getResources().getColor(R.color.color2));
                     getWindow().setNavigationBarColor(getResources().getColor(R.color.color2));
                     base.setBackground(getResources().getDrawable(R.color.color2));
                 }break;
-            case 3:cc = R.drawable.color3;if(Build.VERSION.SDK_INT>=21) {
+        case 3:cc = R.drawable.color3;
+            if(Build.VERSION.SDK_INT>=21) {
                 getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
                 getWindow().setStatusBarColor(getResources().getColor(R.color.color3));
                 getWindow().setNavigationBarColor(getResources().getColor(R.color.color3));
                 base.setBackground(getResources().getDrawable(R.color.color3));
             }break;
-           // case 4:cc = R.drawable.color5;break;
-            default:cc = R.drawable.bgroup;break;
+        case 4:cc = R.drawable.color5;
+            if(Build.VERSION.SDK_INT>=21) {
+                getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                getWindow().setStatusBarColor(getResources().getColor(R.color.color5));
+                getWindow().setNavigationBarColor(getResources().getColor(R.color.color5));
+                base.setBackground(getResources().getDrawable(R.color.color5));
+            }break;
+        default:cc = R.drawable.bgroup;
         }
         temp=0;
         if(ars.size()!=0) {
@@ -126,6 +134,15 @@ public class Main4Activity extends AppCompatActivity {
             case 13: b13.setVisibility(View.VISIBLE);b13.setBackgroundResource(cc);break;
             case 14: b14.setVisibility(View.VISIBLE);b14.setBackgroundResource(cc);break;
             case 15: b15.setVisibility(View.VISIBLE);b15.setBackgroundResource(cc);break;
+            case 16: b16.setVisibility(View.VISIBLE);b16.setBackgroundResource(cc);break;
+            case 17: b17.setVisibility(View.VISIBLE);b17.setBackgroundResource(cc);break;
+            case 18: b18.setVisibility(View.VISIBLE);b18.setBackgroundResource(cc);break;
+            case 19: b19.setVisibility(View.VISIBLE);b19.setBackgroundResource(cc);break;
+            case 20: b20.setVisibility(View.VISIBLE);b20.setBackgroundResource(cc);break;
+            case 21: b21.setVisibility(View.VISIBLE);b21.setBackgroundResource(cc);break;
+            case 22: b22.setVisibility(View.VISIBLE);b22.setBackgroundResource(cc);break;
+            case 23: b23.setVisibility(View.VISIBLE);b23.setBackgroundResource(cc);break;
+            case 24: b24.setVisibility(View.VISIBLE);b24.setBackgroundResource(cc);break;
 
         }
 
@@ -134,21 +151,21 @@ public class Main4Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main4);
+        setContentView(R.layout.layout_level_5);
         base = findViewById(R.id.base);
         //AdRequest adRequest = new AdRequest.Builder().build();
-        //mAdView.loadAd(adRequest);
-        i=0;n=0;c=0;millip=90000;millis=90000;
+       // mAdView.loadAd(adRequest);
+        i=0;n=0;c=0;millip=120000;millis=120000;
         SharedPreferences level = getSharedPreferences("level", AppCompatActivity.MODE_PRIVATE);
         SharedPreferences.Editor editl = level.edit();
-        editl.putInt("level",16);
+        editl.putInt("level",25);
         editl.apply();
         final SharedPreferences res = getSharedPreferences("resume", AppCompatActivity.MODE_PRIVATE);
-        final SharedPreferences.Editor edit = res.edit();
-        ar = new int[16];
+       final SharedPreferences.Editor edit = res.edit();
+        ar = new int[25];
         vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        ars =new Vector(16,1);
-        for(int j=0;j<15;j++){
+        ars =new Vector(24,1);
+        for(int j=0;j<24;j++){
             ars.addElement(j+1);
         }
         Arrays.fill(ar,0);
@@ -184,6 +201,24 @@ public class Main4Activity extends AppCompatActivity {
         b14.setVisibility(View.INVISIBLE);
         b15 = findViewById(R.id.button15);
         b15.setVisibility(View.INVISIBLE);
+        b16 = findViewById(R.id.button16);
+        b16.setVisibility(View.INVISIBLE);
+        b17 = findViewById(R.id.button17);
+        b17.setVisibility(View.INVISIBLE);
+        b18 = findViewById(R.id.button18);
+        b18.setVisibility(View.INVISIBLE);
+        b19 = findViewById(R.id.button19);
+        b19.setVisibility(View.INVISIBLE);
+        b20 = findViewById(R.id.button20);
+        b20.setVisibility(View.INVISIBLE);
+        b21 = findViewById(R.id.button21);
+        b21.setVisibility(View.INVISIBLE);
+        b22 = findViewById(R.id.button22);
+        b22.setVisibility(View.INVISIBLE);
+        b23 = findViewById(R.id.button23);
+        b23.setVisibility(View.INVISIBLE);
+        b24 = findViewById(R.id.button24);
+        b24.setVisibility(View.INVISIBLE);
         time  = findViewById(R.id.time);
         d=1;
         tt = new CountDownTimer(millip,1000){
@@ -341,21 +376,84 @@ public class Main4Activity extends AppCompatActivity {
                 check();
             }
         });
-
+        b16.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sel = 16;
+                check();
+            }
+        });
+        b17.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sel = 17;
+                check();
+            }
+        });
+        b18.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sel = 18;
+                check();
+            }
+        });
+        b19.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sel = 19;
+                check();
+            }
+        });
+        b20.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sel = 20;
+                check();
+            }
+        });
+        b21.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sel = 21;
+                check();
+            }
+        });
+        b22.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sel = 22;
+                check();
+            }
+        });
+        b23.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sel = 23;
+                check();
+            }
+        });
+        b24.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sel = 24;
+                check();
+            }
+        });
     }
     @Override
     public void onPause(){
         super.onPause();
         tt.cancel();
         te.cancel();
-        // k=0;
+       // k=0;
         millip=millis;
         //Toast.makeText(MainActivity.this,String.valueOf(millis),Toast.LENGTH_SHORT).show();
     }
+
     @Override
     public void onBackPressed() {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(Main4Activity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(GameLevel5.this);
         builder.setTitle("Quit Game!");
         builder.setMessage("All your current progress will be lost. Are you sure!!!");
         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
@@ -386,6 +484,7 @@ public class Main4Activity extends AppCompatActivity {
             getWindow().setStatusBarColor(getResources().getColor(R.color.black));
             getWindow().setNavigationBarColor(getResources().getColor(R.color.black));
             base.setBackground(getResources().getDrawable(R.color.black));
+
         }
         SharedPreferences res = getSharedPreferences("resume", AppCompatActivity.MODE_PRIVATE);
         int re = res.getInt("res",0);
@@ -405,25 +504,33 @@ public class Main4Activity extends AppCompatActivity {
             b13.setVisibility(View.INVISIBLE);
             b14.setVisibility(View.INVISIBLE);
             b15.setVisibility(View.INVISIBLE);
-
+            b16.setVisibility(View.INVISIBLE);
+            b17.setVisibility(View.INVISIBLE);
+            b18.setVisibility(View.INVISIBLE);
+            b19.setVisibility(View.INVISIBLE);
+            b20.setVisibility(View.INVISIBLE);
+            b21.setVisibility(View.INVISIBLE);
+            b22.setVisibility(View.INVISIBLE);
+            b23.setVisibility(View.INVISIBLE);
+            b24.setVisibility(View.INVISIBLE);
             i = 0;
             n = 0;
             c = 0;
-            ar = new int[16];
+            ar = new int[25];
             score.setText("SCORE: " + String.valueOf(c));
             Arrays.fill(ar, 0);
             vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-            ars = new Vector(16, 1);
-            for (int j = 0; j < 15; j++) {
+            ars = new Vector(24, 1);
+            for (int j = 0; j < 24; j++) {
                 ars.addElement(j + 1);
                 //for(int j=0;j<24;j++){
                 //    ars.addElement(j+1);
             }
             tt.cancel();
-            time.setText("01:30");
+            time.setText("02:00");
             d=0;
-            millip=90000;
-            millis=90000;
+            millip=120000;
+            millis=120000;
            /* new CountDownTimer(120000,1000){
                 public void onTick(long mill){
                     time.setText(String.valueOf(mill/60000)+":"+String.valueOf((mill/1000)));
@@ -455,5 +562,6 @@ public class Main4Activity extends AppCompatActivity {
         }
 
     }
+
 }
 
