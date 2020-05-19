@@ -15,9 +15,9 @@
         <item name="android:windowBackground">@drawable/splash</item>
     </style>
 
-    <style name="www" parent="Theme.AppCompat.NoActionBar">
+    <style name="mof_theme" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@android:color/background_light</item>
-        <item name="android:colorBackground">#000000</item>
+        <item name="android:colorBackground">#313131</item>
     </style>
 
     <style name="www.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

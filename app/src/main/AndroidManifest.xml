@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.evedevelopers.mof">
+
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -11,52 +13,63 @@
         android:resizeableActivity="false"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/www"
-        >
-
-
-
-        <meta-data android:name="com.google.android.gms.games.APP_ID"
-            android:value="@string/app_id" />
-        <meta-data android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version"/>
-        <activity
-            android:name="com.example.philip.game1.GameLevel5"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.philip.game1.GameOver"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.philip.game1.GameLevel4"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.philip.game1.GameLevel3"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.philip.game1.Splash"
-            android:screenOrientation="portrait"
-            android:theme="@style/SplashTheme">
+        android:theme="@style/mof_theme">
+        <activity android:name=".activities.GamePlay"/>
+        <activity android:name=".activities.Home" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <meta-data
+            android:name="com.google.android.gms.games.APP_ID"
+            android:value="@string/app_id" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
         <activity
-            android:name="com.example.philip.game1.HowTo"
+            android:name=".GameLevel5"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".GameOver"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".GameLevel4"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".GameLevel3"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".Splash"
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme"
+            tools:ignore="LockedOrientationActivity">
+        </activity>
+        <activity
+            android:name=".HowTo"
             android:label="@string/title_activity_how_to"
             android:screenOrientation="portrait"
-            android:theme="@style/www" />
+            android:theme="@style/mof_theme"
+            tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.example.philip.game1.Home"
+            android:name=".Home"
             android:label="@string/title_activity_main5"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.example.philip.game1.Mainhow"
+            android:name=".Mainhow"
             android:label="@string/title_activity_mainhow"
             android:screenOrientation="portrait"
-            android:theme="@style/www" />
-        <activity android:name="com.example.philip.game1.HighScore"></activity>
+            android:theme="@style/mof_theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity android:name=".HighScore" />
     </application>
 
 </manifest>

@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context="com.example.philip.game1.Home"
+    tools:context="com.evedevelopers.mof.Home"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -73,6 +73,13 @@
 
             <ImageView
                 android:id="@+id/rate"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="20dp"
+                app:srcCompat="@drawable/ic_outline_thumb_up_24px"
+                android:tint="@color/white"/>
+            <ImageView
+                android:id="@+id/test"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="20dp"

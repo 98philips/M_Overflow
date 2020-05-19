@@ -1,4 +1,4 @@
-package com.example.philip.game1;
+package com.evedevelopers.mof;
 
 import org.junit.Test;
 

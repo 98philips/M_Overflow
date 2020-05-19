@@ -1,4 +1,4 @@
-package com.example.philip.game1;
+package com.evedevelopers.mof;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,7 +18,6 @@ import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.TextView;
 
-import com.evedevelopers.mof.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 

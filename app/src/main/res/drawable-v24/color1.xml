@@ -3,10 +3,8 @@
 <ripple android:color="#ffffff"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
-<shape android:shape="rectangle"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-    <corners android:radius="40dip" />
-    <solid android:color="#ea2929" />
+<shape android:shape="oval">
+    <solid android:color="@color/red" />
 </shape>
 </item>
 </ripple>

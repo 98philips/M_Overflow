@@ -1,4 +1,4 @@
-package com.example.philip.game1;
+package com.evedevelopers.mof;
 
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
@@ -8,10 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.evedevelopers.mof.R;
-
-
 
 
 public class GameOver extends AppCompatActivity {

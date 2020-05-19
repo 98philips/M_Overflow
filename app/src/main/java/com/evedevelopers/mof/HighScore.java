@@ -1,4 +1,4 @@
-package com.example.philip.game1;
+package com.evedevelopers.mof;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.evedevelopers.mof.R;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -123,13 +122,13 @@ public class HighScore extends AppCompatActivity {
         hs5.setText(String.valueOf(lv.getInt("l5",0)));
         high = hsc;
         if(lv.getInt("l3",0) == 9){
-            hs3.setTextColor(getResources().getColor(R.color.color2));
+            hs3.setTextColor(getResources().getColor(R.color.green));
         }
         if(lv.getInt("l4",0) == 16){
-            hs3.setTextColor(getResources().getColor(R.color.color2));
+            hs3.setTextColor(getResources().getColor(R.color.green));
         }
         if(lv.getInt("l5",0) == 25){
-            hs3.setTextColor(getResources().getColor(R.color.color2));
+            hs3.setTextColor(getResources().getColor(R.color.green));
         }
         //signedInAccount = GoogleSignIn.getLastSignedInAccount(this);
         l=0;

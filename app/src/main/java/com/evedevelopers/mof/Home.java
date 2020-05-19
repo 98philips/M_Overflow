@@ -1,4 +1,4 @@
-package com.example.philip.game1;
+package com.evedevelopers.mof;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,10 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
@@ -23,7 +21,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.evedevelopers.mof.R;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -118,6 +115,13 @@ public class Home extends AppCompatActivity {
         }
         ImageView fab = findViewById(R.id.rate);
         TextView how = findViewById(R.id.ques);
+        ImageView test = findViewById(R.id.test);
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Home.this, com.evedevelopers.mof.activities.Home.class));
+            }
+        });
         ss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

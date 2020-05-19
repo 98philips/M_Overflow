@@ -7,7 +7,7 @@
     android:background="@color/black"
     android:id="@+id/base"
     android:padding="3dp"
-    tools:context="com.example.philip.game1.GameLevel5">
+    tools:context="com.evedevelopers.mof.GameLevel5">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
