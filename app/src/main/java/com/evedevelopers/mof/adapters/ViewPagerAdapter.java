@@ -11,10 +11,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 
 import com.evedevelopers.mof.R;
 import com.evedevelopers.mof.activities.GamePlay;
+import com.evedevelopers.mof.models.OverflowMain;
 
 import java.util.List;
 
@@ -23,12 +23,6 @@ public class ViewPagerAdapter extends PagerAdapter {
     List<Integer> levelList;
     Context context;
     LayoutInflater layoutInflater;
-    int[] greens = {
-            R.color.green0,
-            R.color.green1,
-            R.color.green2,
-            R.color.green3
-    };
 
     public ViewPagerAdapter(List<Integer> levelList, Context context) {
         this.levelList = levelList;
@@ -53,13 +47,13 @@ public class ViewPagerAdapter extends PagerAdapter {
         TextView textView = view.findViewById(R.id.level_text);
         CardView cardView = view.findViewById(R.id.card);
         RelativeLayout r = view.findViewById(R.id.card_bg);
-        r.setBackgroundColor(context.getResources().getColor(greens[position]));
-        textView.setTextColor(context.getResources().getColor(greens[levelList.size()-position-1]));
+        r.setBackgroundColor(context.getResources().getColor(OverflowMain.colors[position]));
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(context, GamePlay.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                i.putExtra("color",position);
                 i.putExtra("level",levelList.get(position));
                 context.startActivity(i);
             }

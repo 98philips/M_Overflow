@@ -2,69 +2,90 @@ package com.evedevelopers.mof.activities;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
+import android.animation.Animator;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.GridLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.evedevelopers.mof.R;
 import com.evedevelopers.mof.models.Cell;
+import com.evedevelopers.mof.models.OverflowMain;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+import static com.evedevelopers.mof.models.OverflowMain.buttons;
+import static com.evedevelopers.mof.models.OverflowMain.colors;
+
 public class GamePlay extends AppCompatActivity {
 
     GridLayout grid;
-    int level;
-    int seq_no;
-    int max;
+    RelativeLayout relative_bg,relativeLayout;
+    int level,color;
+    int seq_no,w,h;
+    int max,bgc;
+    int padding;
+    ImageView imageView;
     List<Cell> cellList, availableCellList;
-    int[] colors = {
-            R.drawable.color1,
-            R.drawable.color2,
-            R.drawable.color3,
-            R.drawable.color4,
-            R.drawable.color5,
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_play_new);
         grid = findViewById(R.id.grid);
+        relativeLayout = findViewById(R.id.relativeLayout);
+        relative_bg = findViewById(R.id.relative_bg);
+        imageView = findViewById(R.id.bg);
         grid.setPadding(8,8,8,8);
         cellList = new ArrayList<>();
         availableCellList = new ArrayList<>();
         seq_no = 0;
         max = -1;
+        bgc = R.color.colorPrimaryDark;
+        padding = (7-level)*2;
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        w = displayMetrics.widthPixels;
+        h = displayMetrics.heightPixels;
         level = getIntent().getIntExtra("level",3);
+        color = colors[getIntent().getIntExtra("color",0)];
+        relative_bg.setBackgroundColor(getResources().getColor(color));
         setUpGrid(level);
     }
 
     private int getSize(int level){
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        return (displayMetrics.widthPixels-((1/level)*1000+16*(level+1)+100))/level;
+        return (displayMetrics.widthPixels-((1/level)*1000+padding*2*(level+1)+100))/level;
     }
 
     private Button getButton(){
-        int color = colors[ThreadLocalRandom.current().nextInt(0, 5)];
+        int r = ThreadLocalRandom.current().nextInt(0, 4);
+        int color_d = buttons[r];
+        int color = colors[r];
         Button button = new Button(this);
         int size = getSize(level);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 size,
                 size
         );
-        params.setMargins(8,8,8,8);
+
+        params.setMargins(padding,padding,padding,padding);
         button.setLayoutParams(params);
-        button.setBackground(getResources().getDrawable(color));
+        button.setBackground(getResources().getDrawable(color_d));
         button.setVisibility(View.INVISIBLE);
-        final Cell c = new Cell(button);
+        final Cell c = new Cell(button,color);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,10 +108,22 @@ public class GamePlay extends AppCompatActivity {
         if(max != level*level) {
             seq_no = 0;
             int random = ThreadLocalRandom.current().nextInt(0, availableCellList.size());
-            Cell cell = availableCellList.get(random);
+            final Cell cell = availableCellList.get(random);
             cell.getButton().setVisibility(View.VISIBLE);
             cell.setSeq_no(max);
             availableCellList.remove(random);
+            imageView.post(new Runnable() {
+                @Override
+                public void run() {
+                    //create your anim here
+                    int c = cell.getColor();
+                    animation(c);
+                    if(bgc != R.color.colorPrimaryDark){
+                        bgc = c;
+                    }
+
+                }
+            });
         }else{
             new AlertDialog.Builder(this).setMessage("You Won").show();
         }
@@ -106,5 +139,29 @@ public class GamePlay extends AppCompatActivity {
             grid.addView(b);
         }
         pickRandom();
+        imageView.post(new Runnable() {
+            @Override
+            public void run() {
+                //create your anim here
+                animation(color);
+            }
+        });
+    }
+
+    void animation(int color){
+        relativeLayout.setBackgroundColor(getResources().getColor(bgc));
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        getWindow().setStatusBarColor(getResources().getColor(color));
+        getWindow().setNavigationBarColor(getResources().getColor(color));
+        if (imageView.getVisibility() == View.VISIBLE) {
+            imageView.setVisibility(View.GONE);
+        }
+        Log.d("Here","");
+        imageView.setBackgroundColor(getResources().getColor(color));
+        double finalRadius = Math.hypot(w,h);
+        Animator anim = ViewAnimationUtils.createCircularReveal(imageView,w/2,0,0, (float) finalRadius);
+        imageView.setVisibility(View.VISIBLE);
+        anim.setDuration(1000);
+        anim.start();
     }
 }
