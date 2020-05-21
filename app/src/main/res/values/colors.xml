@@ -10,5 +10,13 @@
     <color name="orange">#f24f22</color>
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
+    <color name="color1">#00BCD4</color>
+    <color name="color2">#03A9F4</color>
+    <color name="color3">#2196F3</color>
+    <color name="color4">#3F51B5</color>
+    <color name="green0">#005254</color>
+    <color name="green1">#003E3F</color>
+    <color name="green2">#00292A</color>
+    <color name="green3">#001515</color>
 
 </resources>

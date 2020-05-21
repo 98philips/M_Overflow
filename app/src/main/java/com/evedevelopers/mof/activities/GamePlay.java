@@ -63,7 +63,7 @@ public class GamePlay extends AppCompatActivity {
         params.setMargins(8,8,8,8);
         button.setLayoutParams(params);
         button.setBackground(getResources().getDrawable(color));
-        button.setVisibility(View.VISIBLE);
+        button.setVisibility(View.INVISIBLE);
         final Cell c = new Cell(button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
