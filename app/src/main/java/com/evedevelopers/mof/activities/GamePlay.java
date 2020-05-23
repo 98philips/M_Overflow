@@ -2,7 +2,6 @@ package com.evedevelopers.mof.activities;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 
 import android.animation.Animator;
 import android.os.Bundle;
@@ -19,14 +18,13 @@ import android.widget.RelativeLayout;
 
 import com.evedevelopers.mof.R;
 import com.evedevelopers.mof.models.Cell;
-import com.evedevelopers.mof.models.OverflowMain;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static com.evedevelopers.mof.models.OverflowMain.buttons;
-import static com.evedevelopers.mof.models.OverflowMain.colors;
+import static com.evedevelopers.mof.models.OverflowMain.primary_colors;
 
 public class GamePlay extends AppCompatActivity {
 
@@ -59,7 +57,7 @@ public class GamePlay extends AppCompatActivity {
         w = displayMetrics.widthPixels;
         h = displayMetrics.heightPixels;
         level = getIntent().getIntExtra("level",3);
-        color = colors[getIntent().getIntExtra("color",0)];
+        color = primary_colors[getIntent().getIntExtra("color",0)];
         relative_bg.setBackgroundColor(getResources().getColor(color));
         setUpGrid(level);
     }
@@ -73,7 +71,7 @@ public class GamePlay extends AppCompatActivity {
     private Button getButton(){
         int r = ThreadLocalRandom.current().nextInt(0, 4);
         int color_d = buttons[r];
-        int color = colors[r];
+        int color = primary_colors[r];
         Button button = new Button(this);
         int size = getSize(level);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(

@@ -15,9 +15,32 @@
     <color name="color3">#2196F3</color>
     <color name="color4">#3F51B5</color>
 
-    <color name="shade0">#0e98da</color>
-    <color name="shade1">#0064a7</color>
-    <color name="shade2">#144d87</color>
-    <color name="shade3">#213c5e</color>
+<!--    <color name="shade0">#0e98da</color>-->
+<!--    <color name="shade1">#0064a7</color>-->
+<!--    <color name="shade2">#144d87</color>-->
+<!--    <color name="shade3">#213c5e</color>-->
+
+    <color name="shade0">#03A9F4</color>
+    <color name="shade1">#3F51B5</color>
+    <color name="shade2">#009688</color>
+    <color name="shade3">#ff9800</color>
+
+<!--    <color name="shade01">#F2FBFF</color>-->
+<!--    <color name="shade11">#F2FAFF</color>-->
+<!--    <color name="shade21">#F2F9FF</color>-->
+<!--    <color name="shade31">#F2F8FF</color>-->
+
+
+    <color name="shade01">#F2FBFF</color>
+    <color name="shade11">#F2FAFF</color>
+    <color name="shade21">#F2F9FF</color>
+    <color name="shade31">#F2F8FF</color>
+
+    <color name="shade02">#03A9F4</color>
+    <color name="shade12">#3F51B5</color>
+    <color name="shade22">#009688</color>
+    <color name="shade32">#ff9800</color>
+
+
 
 </resources>

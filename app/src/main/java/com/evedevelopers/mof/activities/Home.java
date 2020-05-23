@@ -24,6 +24,8 @@ import com.evedevelopers.mof.models.OverflowMain;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.evedevelopers.mof.models.OverflowMain.primary_colors;
+
 public class Home extends AppCompatActivity implements View.OnClickListener {
 
     Button play;
@@ -32,7 +34,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
     List<Integer> level_list;
     DrawableContainer container;
     RelativeLayout relativeLayout;
-    ImageView imageView;
+    ImageView imageView,settings;
     int w,h,bgc;
 
     @Override
@@ -43,6 +45,8 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
         imageView = findViewById(R.id.bg);
         relativeLayout = findViewById(R.id.relative_bg);
         viewPager = findViewById(R.id.view_pager);
+        settings = findViewById(R.id.settings);
+        settings.setOnClickListener(this);
         level = findViewById(R.id.level);
         level_list = new ArrayList<>();
         level_list.add(3);
@@ -97,19 +101,22 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
                 i.putExtra("level",Integer.parseInt(level.getText().toString()));
                 startActivity(i);
                 break;
+            case R.id.settings:
+                startActivity(new Intent(this,SettingsActivity.class));
+                break;
         }
     }
 
     void animation(final int pos){
-        relativeLayout.setBackgroundColor(getResources().getColor(OverflowMain.colors[bgc]));
+        relativeLayout.setBackgroundColor(getResources().getColor(primary_colors[bgc]));
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        getWindow().setStatusBarColor(getResources().getColor(OverflowMain.colors[pos]));
-        getWindow().setNavigationBarColor(getResources().getColor(OverflowMain.colors[pos]));
+        getWindow().setStatusBarColor(getResources().getColor(primary_colors[pos]));
+        getWindow().setNavigationBarColor(getResources().getColor(primary_colors[pos]));
         if (imageView.getVisibility() == View.VISIBLE) {
             imageView.setVisibility(View.GONE);
         }
         Log.d("Here","");
-        imageView.setBackgroundColor(getResources().getColor(OverflowMain.colors[pos]));
+        imageView.setBackgroundColor(getResources().getColor(primary_colors[pos]));
         double finalRadius = Math.hypot(w,h);
         Animator anim = ViewAnimationUtils.createCircularReveal(imageView,w/2,h/2,(float)w/5, (float) finalRadius);
         imageView.setVisibility(View.VISIBLE);

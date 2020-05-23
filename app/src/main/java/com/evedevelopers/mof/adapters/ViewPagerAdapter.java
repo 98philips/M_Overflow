@@ -18,6 +18,9 @@ import com.evedevelopers.mof.models.OverflowMain;
 
 import java.util.List;
 
+import static com.evedevelopers.mof.models.OverflowMain.accent_colors;
+import static com.evedevelopers.mof.models.OverflowMain.secondary_colors;
+
 public class ViewPagerAdapter extends PagerAdapter {
 
     List<Integer> levelList;
@@ -47,7 +50,8 @@ public class ViewPagerAdapter extends PagerAdapter {
         TextView textView = view.findViewById(R.id.level_text);
         CardView cardView = view.findViewById(R.id.card);
         RelativeLayout r = view.findViewById(R.id.card_bg);
-        r.setBackgroundColor(context.getResources().getColor(OverflowMain.colors[position]));
+        r.setBackgroundColor(context.getResources().getColor(accent_colors[position]));
+        textView.setTextColor(context.getResources().getColor(secondary_colors[position]));
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
