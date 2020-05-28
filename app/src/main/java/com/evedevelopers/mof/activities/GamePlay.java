@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -35,6 +36,7 @@ public class GamePlay extends AppCompatActivity {
     int max,bgc;
     int padding;
     ImageView imageView;
+    RelativeLayout bg_card;
     List<Cell> cellList, availableCellList;
 
     @Override
@@ -44,6 +46,7 @@ public class GamePlay extends AppCompatActivity {
         grid = findViewById(R.id.grid);
         relativeLayout = findViewById(R.id.relativeLayout);
         relative_bg = findViewById(R.id.relative_bg);
+        bg_card = findViewById(R.id.bg_re);
         imageView = findViewById(R.id.bg);
         grid.setPadding(8,8,8,8);
         cellList = new ArrayList<>();
@@ -56,9 +59,12 @@ public class GamePlay extends AppCompatActivity {
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         w = displayMetrics.widthPixels;
         h = displayMetrics.heightPixels;
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        getWindow().setStatusBarColor(getResources().getColor(R.color.dark));
+        getWindow().setNavigationBarColor(getResources().getColor(R.color.dark));
+        relativeLayout.setBackgroundColor(getResources().getColor(R.color.dark));
         level = getIntent().getIntExtra("level",3);
         color = primary_colors[getIntent().getIntExtra("color",0)];
-        relative_bg.setBackgroundColor(getResources().getColor(color));
         setUpGrid(level);
     }
 
@@ -66,6 +72,7 @@ public class GamePlay extends AppCompatActivity {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         return (displayMetrics.widthPixels-((1/level)*1000+padding*2*(level+1)+100))/level;
+
     }
 
     private Button getButton(){
@@ -116,9 +123,6 @@ public class GamePlay extends AppCompatActivity {
                     //create your anim here
                     int c = cell.getColor();
                     animation(c);
-                    if(bgc != R.color.colorPrimaryDark){
-                        bgc = c;
-                    }
 
                 }
             });
@@ -136,21 +140,22 @@ public class GamePlay extends AppCompatActivity {
             Button b = getButton();
             grid.addView(b);
         }
+        imageView.setLayoutParams(new FrameLayout.LayoutParams(
+                getSize(level)*level+(level*32)+30,
+                getSize(level)*level+(level*32)+30
+        ));
         pickRandom();
-        imageView.post(new Runnable() {
-            @Override
-            public void run() {
-                //create your anim here
-                animation(color);
-            }
-        });
+//        imageView.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                //create your anim here
+//                animation(color);
+//            }
+//        });
     }
 
     void animation(int color){
-        relativeLayout.setBackgroundColor(getResources().getColor(bgc));
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        getWindow().setStatusBarColor(getResources().getColor(color));
-        getWindow().setNavigationBarColor(getResources().getColor(color));
+
         if (imageView.getVisibility() == View.VISIBLE) {
             imageView.setVisibility(View.GONE);
         }
@@ -159,7 +164,7 @@ public class GamePlay extends AppCompatActivity {
         double finalRadius = Math.hypot(w,h);
         Animator anim = ViewAnimationUtils.createCircularReveal(imageView,w/2,0,0, (float) finalRadius);
         imageView.setVisibility(View.VISIBLE);
-        anim.setDuration(1000);
+        anim.setDuration(500);
         anim.start();
     }
 }
