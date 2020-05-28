@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.Animator;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.evedevelopers.mof.R;
 import com.evedevelopers.mof.models.Cell;
@@ -32,12 +34,16 @@ public class GamePlay extends AppCompatActivity {
     GridLayout grid;
     RelativeLayout relative_bg,relativeLayout;
     int level,color;
-    int seq_no,w,h;
+    int seq_no,w,h,size;
     int max,bgc;
     int padding;
     ImageView imageView;
     RelativeLayout bg_card;
     List<Cell> cellList, availableCellList;
+    TextView score,time;
+    long millis,millip;
+    boolean game;
+    CountDownTimer te;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +53,14 @@ public class GamePlay extends AppCompatActivity {
         relativeLayout = findViewById(R.id.relativeLayout);
         relative_bg = findViewById(R.id.relative_bg);
         bg_card = findViewById(R.id.bg_re);
+        score = findViewById(R.id.score);
+        time = findViewById(R.id.time);
         imageView = findViewById(R.id.bg);
         grid.setPadding(8,8,8,8);
         cellList = new ArrayList<>();
         availableCellList = new ArrayList<>();
         seq_no = 0;
+        game = false;
         max = -1;
         bgc = R.color.colorPrimaryDark;
         padding = (7-level)*2;
@@ -64,6 +73,7 @@ public class GamePlay extends AppCompatActivity {
         getWindow().setNavigationBarColor(getResources().getColor(R.color.dark));
         relativeLayout.setBackgroundColor(getResources().getColor(R.color.dark));
         level = getIntent().getIntExtra("level",3);
+        size = getSize(level);
         color = primary_colors[getIntent().getIntExtra("color",0)];
         setUpGrid(level);
     }
@@ -80,7 +90,6 @@ public class GamePlay extends AppCompatActivity {
         int color_d = buttons[r];
         int color = primary_colors[r];
         Button button = new Button(this);
-        int size = getSize(level);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 size,
                 size
@@ -94,6 +103,11 @@ public class GamePlay extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!game){
+                    game = true;
+                    setup_timer();
+                }
+
                 if(seq_no == c.getSeq_no() && max == seq_no){
                     pickRandom();
                 }else if(seq_no == c.getSeq_no()){
@@ -112,6 +126,7 @@ public class GamePlay extends AppCompatActivity {
         max++;
         if(max != level*level) {
             seq_no = 0;
+            score.setText(String.valueOf(max));
             int random = ThreadLocalRandom.current().nextInt(0, availableCellList.size());
             final Cell cell = availableCellList.get(random);
             cell.getButton().setVisibility(View.VISIBLE);
@@ -141,8 +156,8 @@ public class GamePlay extends AppCompatActivity {
             grid.addView(b);
         }
         imageView.setLayoutParams(new FrameLayout.LayoutParams(
-                getSize(level)*level+(level*32)+30,
-                getSize(level)*level+(level*32)+30
+                size*level+(level*32)+20,
+                size*level+(level*32)+20
         ));
         pickRandom();
 //        imageView.post(new Runnable() {
@@ -166,5 +181,39 @@ public class GamePlay extends AppCompatActivity {
         imageView.setVisibility(View.VISIBLE);
         anim.setDuration(500);
         anim.start();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(game){
+            setup_timer();
+        }else{
+            millis = (level-2)*30000;
+            millip = millis;
+            time.setText(String.valueOf(millis/1000));
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(te!=null){
+            te.cancel();
+            millip = millis;
+        }
+    }
+
+    void setup_timer(){
+        te = new CountDownTimer(millip,1000){
+            public void onTick(long milli){
+                millis-=1000;
+                String sec;
+                sec = String.valueOf((milli/1000));
+                time.setText(sec);
+            }
+            public void onFinish() {}
+        };
+        te.start();
     }
 }
