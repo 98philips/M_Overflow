@@ -18,6 +18,7 @@
     <style name="mof_theme" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@android:color/background_light</item>
         <item name="android:colorBackground">#313131</item>
+        <item name="android:fontFamily">@font/font_resource</item>
     </style>
 
     <style name="www.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

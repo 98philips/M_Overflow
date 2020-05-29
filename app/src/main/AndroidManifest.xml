@@ -16,7 +16,7 @@
         android:theme="@style/mof_theme">
         <activity
             android:name=".activities.SettingsActivity"
-            android:label="@string/title_activity_settings"></activity>
+            android:label="@string/title_activity_settings" />
         <activity android:name=".activities.GamePlay" />
         <activity android:name=".activities.Home">
             <intent-filter>

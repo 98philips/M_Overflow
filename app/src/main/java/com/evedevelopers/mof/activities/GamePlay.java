@@ -4,8 +4,13 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.Animator;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -107,7 +112,7 @@ public class GamePlay extends AppCompatActivity {
                     game = true;
                     setup_timer();
                 }
-
+                vibrate();
                 if(seq_no == c.getSeq_no() && max == seq_no){
                     pickRandom();
                 }else if(seq_no == c.getSeq_no()){
@@ -138,7 +143,6 @@ public class GamePlay extends AppCompatActivity {
                     //create your anim here
                     int c = cell.getColor();
                     animation(c);
-
                 }
             });
         }else{
@@ -156,8 +160,8 @@ public class GamePlay extends AppCompatActivity {
             grid.addView(b);
         }
         imageView.setLayoutParams(new FrameLayout.LayoutParams(
-                size*level+(level*32)+20,
-                size*level+(level*32)+20
+                size*level+(level*32)+30,
+                size*level+(level*32)+30
         ));
         pickRandom();
 //        imageView.post(new Runnable() {
@@ -181,6 +185,22 @@ public class GamePlay extends AppCompatActivity {
         imageView.setVisibility(View.VISIBLE);
         anim.setDuration(500);
         anim.start();
+    }
+
+    void vibrate(){
+        SharedPreferences vib = getSharedPreferences("settings",MODE_PRIVATE);
+        if(vib.getBoolean("vibrate",true)){
+            Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            assert v != null;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                v.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
+            } else {
+                //deprecated in API 26
+                v.vibrate(50);
+            }
+
+
+        }
     }
 
     @Override
