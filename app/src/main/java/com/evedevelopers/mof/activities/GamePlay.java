@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.Animator;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -69,6 +70,7 @@ public class GamePlay extends AppCompatActivity {
         max = -1;
         bgc = R.color.colorPrimaryDark;
         padding = (7-level)*2;
+        level = getIntent().getIntExtra("level",3);
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         w = displayMetrics.widthPixels;
@@ -77,7 +79,6 @@ public class GamePlay extends AppCompatActivity {
         getWindow().setStatusBarColor(getResources().getColor(R.color.dark));
         getWindow().setNavigationBarColor(getResources().getColor(R.color.dark));
         relativeLayout.setBackgroundColor(getResources().getColor(R.color.dark));
-        level = getIntent().getIntExtra("level",3);
         size = getSize(level);
         color = primary_colors[getIntent().getIntExtra("color",0)];
         setUpGrid(level);
@@ -118,13 +119,22 @@ public class GamePlay extends AppCompatActivity {
                 }else if(seq_no == c.getSeq_no()){
                     seq_no++;
                 }else{
-                    new AlertDialog.Builder(GamePlay.this).setMessage("Game Over").show();
+                    game_over("Game Over");
                 }
             }
         });
         cellList.add(c);
         availableCellList.add(c);
         return button;
+    }
+
+    void game_over(String message){
+        Intent gameOver = new Intent(this,GameOver.class);
+        gameOver.putExtra("score",max);
+        gameOver.putExtra("message",message);
+        gameOver.putExtra("level",level);
+        startActivity(gameOver);
+        finish();
     }
 
     private void pickRandom(){
@@ -146,7 +156,7 @@ public class GamePlay extends AppCompatActivity {
                 }
             });
         }else{
-            new AlertDialog.Builder(this).setMessage("You Won").show();
+            game_over("You Won");
         }
 
 
