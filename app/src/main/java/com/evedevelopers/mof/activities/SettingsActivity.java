@@ -5,10 +5,14 @@ import android.os.Bundle;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
 
 import com.evedevelopers.mof.R;
 
 public class SettingsActivity extends AppCompatActivity {
+
+    public static final String
+            KEY_PREF_VIBRATION_SWITCH = "vibration";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,12 +26,14 @@ public class SettingsActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+        PreferenceManager.setDefaultValues(this, R.xml.root_preferences, false);
     }
 
     public static class SettingsFragment extends PreferenceFragmentCompat {
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey);
+
         }
     }
 }

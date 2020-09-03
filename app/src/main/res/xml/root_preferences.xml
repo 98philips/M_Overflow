@@ -3,11 +3,11 @@
     <PreferenceCategory app:title="@string/sound_vibration">
 
         <SwitchPreferenceCompat
-            app:key="sync"
+            app:key="vibration"
             app:title="@string/vibration" />
 
         <SwitchPreferenceCompat
-            app:key="sync"
+            app:key="sound"
             app:title="@string/sounds" />
     </PreferenceCategory>
 

@@ -2,6 +2,7 @@ package com.evedevelopers.mof.activities;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import android.animation.Animator;
 import android.content.Context;
@@ -133,6 +134,7 @@ public class GamePlay extends AppCompatActivity {
         gameOver.putExtra("score",max);
         gameOver.putExtra("message",message);
         gameOver.putExtra("level",level);
+        gameOver.putExtra("time",(millip-millis)/1000);
         startActivity(gameOver);
         finish();
     }
@@ -198,8 +200,9 @@ public class GamePlay extends AppCompatActivity {
     }
 
     void vibrate(){
-        SharedPreferences vib = getSharedPreferences("settings",MODE_PRIVATE);
-        if(vib.getBoolean("vibrate",true)){
+        SharedPreferences sharedPref =
+                PreferenceManager.getDefaultSharedPreferences(this);
+        if(sharedPref.getBoolean(SettingsActivity.KEY_PREF_VIBRATION_SWITCH,true)){
             Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
             assert v != null;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

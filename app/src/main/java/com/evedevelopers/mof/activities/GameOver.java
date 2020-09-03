@@ -13,7 +13,7 @@ import com.evedevelopers.mof.R;
 
 public class GameOver extends AppCompatActivity implements View.OnClickListener {
 
-    TextView level,score,level_best,badge,message;
+    TextView level,score,level_best,badge,message,time;
     ImageView home,tryAgain,nextLevel;
     int level_number = 3;
 
@@ -29,6 +29,7 @@ public class GameOver extends AppCompatActivity implements View.OnClickListener 
         home = findViewById(R.id.home);
         tryAgain = findViewById(R.id.tryAgain);
         nextLevel = findViewById(R.id.nextLevel);
+        time = findViewById(R.id.time_number);
         home.setOnClickListener(this);
         tryAgain.setOnClickListener(this);
         nextLevel.setOnClickListener(this);
@@ -41,6 +42,7 @@ public class GameOver extends AppCompatActivity implements View.OnClickListener 
         message.setText(message_string);
         level.setText(String.valueOf(level_number));
         score.setText(String.valueOf(score_number));
+        time.setText(String.valueOf(incoming.getLongExtra("time",0)).concat("s"));
         level_best.setText(String.valueOf(level_best_number));
         configBadge(score_number,level_best_number,preferences);
         decideButtonVisibility(score_number,level_number);
