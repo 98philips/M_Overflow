@@ -13,6 +13,8 @@ public class SettingsActivity extends AppCompatActivity {
 
     public static final String
             KEY_PREF_VIBRATION_SWITCH = "vibration";
+    public static final String
+            KEY_PREF_SOUND_SWITCH = "sound";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

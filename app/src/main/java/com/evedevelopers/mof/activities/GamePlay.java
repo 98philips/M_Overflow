@@ -8,6 +8,7 @@ import android.animation.Animator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -51,6 +52,8 @@ public class GamePlay extends AppCompatActivity {
     long millis,millip;
     boolean game;
     CountDownTimer te;
+    MediaPlayer mPlayer;
+    SharedPreferences sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +66,9 @@ public class GamePlay extends AppCompatActivity {
         score = findViewById(R.id.score);
         time = findViewById(R.id.time);
         imageView = findViewById(R.id.bg);
+        mPlayer = MediaPlayer.create(this,R.raw.touch);
         grid.setPadding(8,8,8,8);
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         cellList = new ArrayList<>();
         availableCellList = new ArrayList<>();
         seq_no = 0;
@@ -115,6 +120,7 @@ public class GamePlay extends AppCompatActivity {
                     setup_timer();
                 }
                 vibrate();
+                play_sound();
                 if(seq_no == c.getSeq_no() && max == seq_no){
                     pickRandom();
                 }else if(seq_no == c.getSeq_no()){
@@ -200,8 +206,6 @@ public class GamePlay extends AppCompatActivity {
     }
 
     void vibrate(){
-        SharedPreferences sharedPref =
-                PreferenceManager.getDefaultSharedPreferences(this);
         if(sharedPref.getBoolean(SettingsActivity.KEY_PREF_VIBRATION_SWITCH,true)){
             Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
             assert v != null;
@@ -248,5 +252,35 @@ public class GamePlay extends AppCompatActivity {
             public void onFinish() {}
         };
         te.start();
+    }
+
+    @Override
+    protected void onDestroy() {
+        mPlayer.release();
+        super.onDestroy();
+    }
+
+    void play_sound(){
+        mPlayer = MediaPlayer.create(this, R.raw.touch);
+        if(sharedPref.getBoolean(SettingsActivity.KEY_PREF_SOUND_SWITCH,true)) {
+            try {
+                if (mPlayer.isPlaying()) {
+                    mPlayer.stop();
+                    mPlayer.release();
+                    mPlayer = MediaPlayer.create(this, R.raw.touch);
+                }
+                mPlayer.start();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        if(mPlayer!=null) {
+            mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mediaPlayer) {
+                    mPlayer.release();
+                }
+            });
+        }
     }
 }

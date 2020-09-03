@@ -8,7 +8,7 @@
 
         <SwitchPreferenceCompat
             app:key="sound"
-            app:title="@string/sounds" />
+            app:title="Sound" />
     </PreferenceCategory>
 
 
