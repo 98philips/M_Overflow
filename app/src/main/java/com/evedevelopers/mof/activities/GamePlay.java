@@ -6,6 +6,7 @@ import androidx.preference.PreferenceManager;
 
 import android.animation.Animator;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
@@ -27,6 +28,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.evedevelopers.mof.GameLevel5;
 import com.evedevelopers.mof.R;
 import com.evedevelopers.mof.models.Cell;
 
@@ -282,5 +284,24 @@ public class GamePlay extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Quit Game!");
+        builder.setMessage("All your current progress will be lost. Are you sure!!!");
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                GamePlay.super.onBackPressed();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        builder.show();
     }
 }

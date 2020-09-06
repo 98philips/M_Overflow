@@ -3,11 +3,15 @@
     <PreferenceCategory app:title="@string/sound_vibration">
 
         <SwitchPreferenceCompat
+            app:icon="@drawable/ic_baseline_vibration_24"
             app:key="vibration"
+            app:defaultValue="true"
             app:title="@string/vibration" />
 
         <SwitchPreferenceCompat
+            app:icon="@drawable/ic_baseline_volume_up_24"
             app:key="sound"
+            app:defaultValue="true"
             app:title="Sound" />
     </PreferenceCategory>
 

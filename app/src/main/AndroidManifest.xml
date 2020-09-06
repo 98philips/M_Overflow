@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/mof_theme">
-        <activity android:name=".activities.GameOver"></activity>
+        <activity android:name=".activities.Stats"></activity>
+        <activity android:name=".activities.GameOver" />
         <activity
             android:name=".activities.SettingsActivity"
             android:label="@string/title_activity_settings" />

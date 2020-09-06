@@ -48,6 +48,7 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
         settings = findViewById(R.id.settings);
         settings.setOnClickListener(this);
         level = findViewById(R.id.level);
+        findViewById(R.id.stats).setOnClickListener(this);
         level_list = new ArrayList<>();
         level_list.add(3);
         level_list.add(4);
@@ -103,6 +104,9 @@ public class Home extends AppCompatActivity implements View.OnClickListener {
                 break;
             case R.id.settings:
                 startActivity(new Intent(this,SettingsActivity.class));
+                break;
+            case R.id.stats:
+                startActivity(new Intent(this,Stats.class));
                 break;
         }
     }
