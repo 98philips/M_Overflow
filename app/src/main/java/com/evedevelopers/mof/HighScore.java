@@ -27,7 +27,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+import java.util.Objects;
 
 
 public class HighScore extends AppCompatActivity {
@@ -139,7 +139,7 @@ public class HighScore extends AppCompatActivity {
                if(!isSignedIn()) {
                    signInSilently();
                }else{
-                   showLeaderboard();
+                   showLeaderBoard();
                }
 
            }
@@ -166,7 +166,7 @@ public class HighScore extends AppCompatActivity {
                                     .submitScore(getString(R.string.leaderboard_high_score), high);
                             if(l==1){
                                 l=0;
-                                showLeaderboard();
+                                showLeaderBoard();
 
                             }
                         } else {
@@ -196,7 +196,7 @@ public class HighScore extends AppCompatActivity {
                         .submitScore(getString(R.string.leaderboard_high_score), high);
                 if(l==1){
                     l=0;
-                    showLeaderboard();
+                    showLeaderBoard();
 
                 }
 
@@ -216,8 +216,8 @@ public class HighScore extends AppCompatActivity {
         Intent intent = signInClient.getSignInIntent();
         startActivityForResult(intent, RC_SIGN_IN);
     }
-    private void showLeaderboard() {
-        Games.getLeaderboardsClient(this, GoogleSignIn.getLastSignedInAccount(this))
+    private void showLeaderBoard() {
+        Games.getLeaderboardsClient(this, Objects.requireNonNull(GoogleSignIn.getLastSignedInAccount(this)))
                 .getLeaderboardIntent(getString(R.string.leaderboard_high_score))
                 .addOnSuccessListener(new OnSuccessListener<Intent>() {
                     @Override

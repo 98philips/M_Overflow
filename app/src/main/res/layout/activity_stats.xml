@@ -6,7 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="16dp"
-    android:id="@+id/root_layout"
     android:gravity="center"
     tools:context=".activities.Stats">
 
@@ -19,6 +18,23 @@
         android:layout_marginBottom="32dp"
         android:textSize="24sp"
         android:text="My Stats"/>
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/root_layout"
+        android:gravity="center"/>
+
+    <Button
+        android:id="@+id/leader_board_button"
+        android:layout_marginTop="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="view leader board"
+        />
+
 
 
 
